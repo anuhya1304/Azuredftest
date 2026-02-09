@@ -1,0 +1,13 @@
+{
+	"name": "Restserviceapitest",
+	"properties": {
+		"description": "an rest api to test by adding full url",
+		"annotations": [],
+		"type": "RestService",
+		"typeProperties": {
+			"url": "https://jsonplaceholder.typicode.com/posts",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous"
+		}
+	}
+}
