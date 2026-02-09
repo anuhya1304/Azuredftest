@@ -11,6 +11,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
 		},
+		"AzureDataLakeStoragetestgpt_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStoragetestgpt'"
+		},
 		"AzureSqlDatabase1_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'AzureSqlDatabase1'"
@@ -27,6 +31,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'storageibrowse'"
 		},
+		"AzureDataLakeStoragetestgpt_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://minirojectstorage.dfs.core.windows.net/"
+		},
 		"AzureSqlDatabase1_properties_typeProperties_server": {
 			"type": "string",
 			"defaultValue": "testibrowse.database.windows.net"
@@ -38,6 +46,14 @@
 		"AzureSqlDatabase1_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "ibrowsesqltest"
+		},
+		"RestServiceapi_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://jsonplaceholder.typicode.com"
+		},
+		"Restserviceapitest_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://jsonplaceholder.typicode.com/posts"
 		},
 		"dls_api_src_properties_typeProperties_url": {
 			"type": "string",
@@ -85,6 +101,9 @@
 					"AzureBlobStorage1_connectionString": {
 						"value": "[parameters('AzureBlobStorage1_connectionString')]"
 					},
+					"AzureDataLakeStoragetestgpt_accountKey": {
+						"value": "[parameters('AzureDataLakeStoragetestgpt_accountKey')]"
+					},
 					"AzureSqlDatabase1_password": {
 						"value": "[parameters('AzureSqlDatabase1_password')]"
 					},
@@ -97,6 +116,9 @@
 					"storageibrowse_accountKey": {
 						"value": "[parameters('storageibrowse_accountKey')]"
 					},
+					"AzureDataLakeStoragetestgpt_properties_typeProperties_url": {
+						"value": "[parameters('AzureDataLakeStoragetestgpt_properties_typeProperties_url')]"
+					},
 					"AzureSqlDatabase1_properties_typeProperties_server": {
 						"value": "[parameters('AzureSqlDatabase1_properties_typeProperties_server')]"
 					},
@@ -105,6 +127,12 @@
 					},
 					"AzureSqlDatabase1_properties_typeProperties_userName": {
 						"value": "[parameters('AzureSqlDatabase1_properties_typeProperties_userName')]"
+					},
+					"RestServiceapi_properties_typeProperties_url": {
+						"value": "[parameters('RestServiceapi_properties_typeProperties_url')]"
+					},
+					"Restserviceapitest_properties_typeProperties_url": {
+						"value": "[parameters('Restserviceapitest_properties_typeProperties_url')]"
 					},
 					"dls_api_src_properties_typeProperties_url": {
 						"value": "[parameters('dls_api_src_properties_typeProperties_url')]"
@@ -121,6 +149,26 @@
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "ibrowsedf15126_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ibrowsedf15126_ArmTemplate_0')]"
+			]
 		}
 	]
 }
