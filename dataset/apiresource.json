@@ -1,0 +1,12 @@
+{
+	"name": "apiresource",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Restserviceapitest",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"schema": []
+	}
+}
