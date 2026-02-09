@@ -1,0 +1,68 @@
+{
+	"name": "AzureSqlTable1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Patient_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Pregnant",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Glucose",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "Diastolic_BP",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "Skin_Fold",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "Serum_Insulin",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "BMI",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "Diabetes_Pedigree",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "Age",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Class",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Diabetes_Data"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

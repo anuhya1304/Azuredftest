@@ -1,0 +1,9 @@
+{
+	"name": "ibrowsedf15126",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "c9761f64-4dbd-4f87-ac01-e462c0f5aa47",
+		"tenantId": "0ccc1db0-5409-44a8-91db-a598f0ec8269"
+	}
+}

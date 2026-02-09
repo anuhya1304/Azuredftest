@@ -1,0 +1,61 @@
+{
+	"name": "DelimitedText1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Diabetes_Missing_Data.csv",
+				"container": "testcontainer119"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Pregnant",
+				"type": "String"
+			},
+			{
+				"name": "Glucose",
+				"type": "String"
+			},
+			{
+				"name": "Diastolic_BP",
+				"type": "String"
+			},
+			{
+				"name": "Skin_Fold",
+				"type": "String"
+			},
+			{
+				"name": "Serum_Insulin",
+				"type": "String"
+			},
+			{
+				"name": "BMI",
+				"type": "String"
+			},
+			{
+				"name": "Diabetes_Pedigree",
+				"type": "String"
+			},
+			{
+				"name": "Age",
+				"type": "String"
+			},
+			{
+				"name": "Class",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,17 @@
+{
+	"name": "blob_event_trigger",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/raw-container/blobs/",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/6fe58379-69b9-47f6-a6ef-7b3e0a21dd15/resourceGroups/final-mini-project/providers/Microsoft.Storage/storageAccounts/minirojectstorage",
+			"events": [
+				"Microsoft.Storage.BlobCreated"
+			]
+		}
+	}
+}
