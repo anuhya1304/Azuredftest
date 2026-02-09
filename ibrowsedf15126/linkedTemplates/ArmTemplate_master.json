@@ -1,0 +1,126 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "ibrowsedf15126"
+		},
+		"AzureBlobStorage1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
+		},
+		"AzureSqlDatabase1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'AzureSqlDatabase1'"
+		},
+		"dls_api_src_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'dls_api_src'"
+		},
+		"finlablobstorage_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'finlablobstorage'"
+		},
+		"storageibrowse_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'storageibrowse'"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "testibrowse.database.windows.net"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "ibrowsetestsqldb"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "ibrowsesqltest"
+		},
+		"dls_api_src_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://storageibrowse.dfs.core.windows.net/"
+		},
+		"l_restapi_src_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://reqres.in/api/users?page=2"
+		},
+		"storageibrowse_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://storageibrowse.dfs.core.windows.net/"
+		},
+		"blob_event_trigger_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/6fe58379-69b9-47f6-a6ef-7b3e0a21dd15/resourceGroups/final-mini-project/providers/Microsoft.Storage/storageAccounts/minirojectstorage"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "ibrowsedf15126_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzureBlobStorage1_connectionString": {
+						"value": "[parameters('AzureBlobStorage1_connectionString')]"
+					},
+					"AzureSqlDatabase1_password": {
+						"value": "[parameters('AzureSqlDatabase1_password')]"
+					},
+					"dls_api_src_accountKey": {
+						"value": "[parameters('dls_api_src_accountKey')]"
+					},
+					"finlablobstorage_connectionString": {
+						"value": "[parameters('finlablobstorage_connectionString')]"
+					},
+					"storageibrowse_accountKey": {
+						"value": "[parameters('storageibrowse_accountKey')]"
+					},
+					"AzureSqlDatabase1_properties_typeProperties_server": {
+						"value": "[parameters('AzureSqlDatabase1_properties_typeProperties_server')]"
+					},
+					"AzureSqlDatabase1_properties_typeProperties_database": {
+						"value": "[parameters('AzureSqlDatabase1_properties_typeProperties_database')]"
+					},
+					"AzureSqlDatabase1_properties_typeProperties_userName": {
+						"value": "[parameters('AzureSqlDatabase1_properties_typeProperties_userName')]"
+					},
+					"dls_api_src_properties_typeProperties_url": {
+						"value": "[parameters('dls_api_src_properties_typeProperties_url')]"
+					},
+					"l_restapi_src_properties_typeProperties_url": {
+						"value": "[parameters('l_restapi_src_properties_typeProperties_url')]"
+					},
+					"storageibrowse_properties_typeProperties_url": {
+						"value": "[parameters('storageibrowse_properties_typeProperties_url')]"
+					},
+					"blob_event_trigger_properties_typeProperties_scope": {
+						"value": "[parameters('blob_event_trigger_properties_typeProperties_scope')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
