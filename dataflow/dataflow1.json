@@ -1,0 +1,74 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_raw_customer_csv",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_processed_customer_parquet",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "select1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Index as short 'index',",
+				"          {Customer Id} as string 'customer_id',",
+				"          {First Name} as string 'first_name',",
+				"          {Last Name} as string 'last_name',",
+				"          Company as string 'company',",
+				"          City as string 'city',",
+				"          Country as string 'country',",
+				"          {Phone 1} as string 'phone_1',",
+				"          {Phone 2} as string 'phone_2',",
+				"          Email as string 'email',",
+				"          {Subscription Date} as string 'subscription_date',",
+				"          Website as string 'website'",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> source1",
+				"source1 select(mapColumn(",
+				"          index = Index,",
+				"          customer_id = {Customer Id},",
+				"          first_name = {First Name},",
+				"          last_name = {Last Name},",
+				"          company = Company,",
+				"          city = City,",
+				"          country = Country,",
+				"          phone_1 = {Phone 1},",
+				"          phone_2 = {Phone 2},",
+				"          email = Email,",
+				"          subscription_date = {Subscription Date},",
+				"          website = Website",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'parquet',",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
+			]
+		}
+	}
+}

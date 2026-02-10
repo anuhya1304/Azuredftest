@@ -1,0 +1,19 @@
+{
+	"name": "ds_processed_products_parquet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_ds_processed_products_parquet",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "processedfolder"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}

@@ -1,5 +1,5 @@
 {
-	"name": "apiresource",
+	"name": "apiresource09022025",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "Restserviceapitest",
@@ -7,6 +7,9 @@
 		},
 		"annotations": [],
 		"type": "RestResource",
+		"typeProperties": {
+			"relativeUrl": "/posts"
+		},
 		"schema": []
 	}
 }

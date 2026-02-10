@@ -1,0 +1,19 @@
+{
+	"name": "ds_processed_customer_parquet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "storageibrowse",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "processedfolder"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
