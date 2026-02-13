@@ -126,8 +126,39 @@
 							},
 							"userProperties": [],
 							"typeProperties": {
+								"source": {
+									"type": "JsonSource",
+									"storeSettings": {
+										"type": "AzureBlobFSReadSettings",
+										"recursive": true,
+										"enablePartitionDiscovery": false
+									},
+									"formatSettings": {
+										"type": "JsonReadSettings"
+									}
+								},
+								"sink": {
+									"type": "DelimitedTextSink",
+									"formatSettings": {
+										"type": "DelimitedTextWriteSettings",
+										"quoteAllText": true,
+										"fileExtension": ".txt"
+									}
+								},
 								"enableStaging": false
-							}
+							},
+							"inputs": [
+								{
+									"referenceName": "ADLSRawDataset",
+									"type": "DatasetReference"
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "ds_open_meteo_http",
+									"type": "DatasetReference"
+								}
+							]
 						},
 						{
 							"name": "Calculate_New_Year",
@@ -183,16 +214,10 @@
 			}
 		],
 		"variables": {
-			"year": {
-				"type": "String"
-			},
-			"endyear": {
-				"type": "String"
-			},
-			"TempYear": {
-				"type": "String"
-			},
 			"Calculate_New_Year": {
+				"type": "String"
+			},
+			"year": {
 				"type": "String"
 			},
 			"tempYear": {
