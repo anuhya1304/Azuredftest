@@ -1,0 +1,13 @@
+{
+	"name": "METEOHTTP",
+	"properties": {
+		"description": "an  test http meteo",
+		"annotations": [],
+		"type": "HttpServer",
+		"typeProperties": {
+			"url": "https://archive-api.open-meteo.com",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous"
+		}
+	}
+}
