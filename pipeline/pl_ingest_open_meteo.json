@@ -1,0 +1,117 @@
+{
+	"name": "pl_ingest_open_meteo",
+	"properties": {
+		"activities": [
+			{
+				"name": "Set_Start_Year",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "year",
+					"value": "2018"
+				}
+			},
+			{
+				"name": "Set_Start_End_Year",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "endyear",
+					"value": {
+						"value": "@formatDateTime(utcnow(),'yyyy')\n",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "meteo_untill",
+				"type": "Until",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@greater(int(variables('year')), int(variables('endYear')))\n",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "meteo Copy data1",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "DelimitedTextSource",
+									"storeSettings": {
+										"type": "HttpReadSettings",
+										"requestMethod": "GET",
+										"additionalHeaders": {
+											"value": "@concat(\n'/v1/archive?latitude=17.3850&longitude=78.4867&start_date=',\nvariables('year'),\n'-01-01&end_date=',\nvariables('year'),\n'-12-31&hourly=temperature_2m'\n)\n",
+											"type": "Expression"
+										}
+									},
+									"formatSettings": {
+										"type": "DelimitedTextReadSettings"
+									}
+								},
+								"sink": {
+									"type": "JsonSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "JsonWriteSettings",
+										"filePattern": {
+											"value": "@concat('open_meteo/year=',variables('year'))\n",
+											"type": "Expression"
+										}
+									}
+								},
+								"enableStaging": false
+							},
+							"inputs": [
+								{
+									"referenceName": "ds_open_meteo_http",
+									"type": "DatasetReference"
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "ADLSRawDataset",
+									"type": "DatasetReference"
+								}
+							]
+						}
+					],
+					"timeout": "0.12:00:00"
+				}
+			}
+		],
+		"variables": {
+			"year": {
+				"type": "String"
+			},
+			"endyear": {
+				"type": "String"
+			}
+		},
+		"annotations": []
+	}
+}
