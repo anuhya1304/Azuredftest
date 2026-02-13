@@ -95,9 +95,87 @@
 							"outputs": [
 								{
 									"referenceName": "ADLSRawDataset",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"folderPath": {
+											"value": "@concat('open_meteo/year=',variables('year'))\n",
+											"type": "Expression"
+										},
+										"filename": "data.json"
+									}
 								}
 							]
+						},
+						{
+							"name": "Copy data1",
+							"type": "Copy",
+							"dependsOn": [
+								{
+									"activity": "meteo Copy data1",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"enableStaging": false
+							}
+						},
+						{
+							"name": "Calculate_New_Year",
+							"type": "SetVariable",
+							"dependsOn": [
+								{
+									"activity": "Copy data1",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "tempYear",
+								"value": {
+									"value": "@string(add(int(variables('year')),1))\n",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "Assign_New_Year",
+							"type": "SetVariable",
+							"dependsOn": [
+								{
+									"activity": "Calculate_New_Year",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "year",
+								"value": {
+									"value": "@variables('tempYear')\n",
+									"type": "Expression"
+								}
+							}
 						}
 					],
 					"timeout": "0.12:00:00"
@@ -109,6 +187,15 @@
 				"type": "String"
 			},
 			"endyear": {
+				"type": "String"
+			},
+			"TempYear": {
+				"type": "String"
+			},
+			"Calculate_New_Year": {
+				"type": "String"
+			},
+			"tempYear": {
 				"type": "String"
 			}
 		},
